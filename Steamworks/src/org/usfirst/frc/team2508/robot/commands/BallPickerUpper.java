@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2508.robot.commands;
 
 import org.usfirst.frc.team2508.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -23,29 +22,17 @@ public class BallPickerUpper extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
-		if (Robot.oi.a.get()&& lTime+200 < System.currentTimeMillis()){
-			lTime = System.currentTimeMillis();
-			if (hacks){
-				Robot.oi.ballRunner.set(-1);
-			 hacks = false;	
-			}
-			else{
-				Robot.oi.ballRunner.set(0);
-				hacks = true;
-			}
-			
-		}
+		Robot.oi.ballRunner.set(-1);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return !(Robot.oi.a.get());
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-
+		Robot.oi.ballRunner.set(0);
 	}
 
 	// Called when another command which requires one or more of the same

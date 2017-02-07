@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team2508.robot.commands.*;
 //import org.usfirst.frc.team2508.robot.subsystems.*;

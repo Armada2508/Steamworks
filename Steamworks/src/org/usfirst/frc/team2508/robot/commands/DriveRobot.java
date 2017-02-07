@@ -9,7 +9,7 @@ import org.usfirst.frc.team2508.robot.Robot;
  */
 public class DriveRobot extends Command {
 	
-	public int count = 1;
+	public int count = 2;
 	
     public DriveRobot() {
         // Use requires() here to declare subsystem dependencies
@@ -27,41 +27,13 @@ public class DriveRobot extends Command {
 	
     protected void execute() {
     	
-    	switch (count){
-    	case 0:
-        	Robot.driveSystem.drive(Robot.oi.stick.getRawAxis(5), Robot.oi.stick.getRawAxis(1));
-    		break;
-    	case 1:
-    		double RCalc, LCalc;
-    		RCalc = Robot.oi.stick.getRawAxis(1)*2;
-    		LCalc = Robot.oi.stick.getRawAxis(1)*2;
-    		RCalc -= Robot.oi.stick.getRawAxis(0);
-    		LCalc += Robot.oi.stick.getRawAxis(0);
-    		Robot.driveSystem.drive(LCalc, RCalc);
-    		break;
-    	case 2:
     		double RCalc1, LCalc1;
     		RCalc1 = Robot.oi.stick.getRawAxis(1);
     		LCalc1 = Robot.oi.stick.getRawAxis(1);
     		RCalc1 -= Robot.oi.stick.getRawAxis(4);
     		LCalc1 += Robot.oi.stick.getRawAxis(4);
     		Robot.driveSystem.drive(LCalc1,RCalc1);
-    		break;
-    	case 3:
-    		double RCalc2 = 0, LCalc2 = 0;
-    		RCalc2 -= Robot.oi.stick.getRawAxis(3);
-    		LCalc2 -= Robot.oi.stick.getRawAxis(3);
-    		RCalc2 += Robot.oi.stick.getRawAxis(2);
-    		LCalc2 += Robot.oi.stick.getRawAxis(2);
-    		RCalc2 -= Robot.oi.stick.getRawAxis(0);
-    		LCalc2 += Robot.oi.stick.getRawAxis(0);
-    		Robot.driveSystem.drive(LCalc2, RCalc2);
-    		break;
-    	default:
-        	Robot.driveSystem.drive(Robot.oi.stick.getRawAxis(5), Robot.oi.stick.getRawAxis(1));
-        	break;
     	
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

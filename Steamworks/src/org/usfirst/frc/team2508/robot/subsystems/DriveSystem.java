@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2508.robot.subsystems;
 
-//import org.usfirst.frc.team2508.robot.Robot;
-
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -35,6 +33,7 @@ public class DriveSystem extends Subsystem {
     	upperLeftTalon.setP(5);
     	upperLeftTalon.setI(1); 
     	upperLeftTalon.setD(0.2);
+    	
     	lowerLeftTalon.changeControlMode(TalonControlMode.Follower);
     	lowerLeftTalon.set(0);
 	}
@@ -50,6 +49,7 @@ public class DriveSystem extends Subsystem {
     	upperRightTalon.setP(5);
     	upperRightTalon.setI(1); 
     	upperRightTalon.setD(0.2);
+    	
     	lowerRightTalon.changeControlMode(TalonControlMode.Follower);
     	lowerRightTalon.set(3);
 	}
