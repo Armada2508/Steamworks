@@ -22,11 +22,12 @@ import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	//TODO: Remove all the example stuff
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSystem driveSystem = new DriveSystem();
 	public static OI oi;
 	
-	Compressor mainCompressor = new Compressor(0);
+	public static final Compressor mainCompressor = new Compressor(0);
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();

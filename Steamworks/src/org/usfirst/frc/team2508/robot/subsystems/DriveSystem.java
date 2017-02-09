@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,50 +13,41 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem {
 	
 	
-	public CANTalon upperLeftTalon = new CANTalon(0);
-	public CANTalon lowerLeftTalon = new CANTalon(1);
-	public CANTalon upperRightTalon = new CANTalon(3);
-	public CANTalon lowerRightTalon = new CANTalon(4);
+	public CANTalon upperLeftTalon;
+	public CANTalon lowerLeftTalon;
+	public CANTalon upperRightTalon;
+	public CANTalon lowerRightTalon;
+	
+	public DriveSystem(){
+		upperLeftTalon = new CANTalon(0);
+		lowerLeftTalon = new CANTalon(1);
+		upperRightTalon = new CANTalon(3);
+		lowerRightTalon = new CANTalon(4);
+		initTalonSet(upperLeftTalon, lowerLeftTalon, 0, 0);
+		initTalonSet(upperRightTalon, lowerRightTalon, 3, 1);
+	}
 	
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
-	public void leftSideControll(double power){
-		upperLeftTalon.set(power);
-		
-    	upperLeftTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	upperLeftTalon.reverseSensor(false);
-    	upperLeftTalon.configNominalOutputVoltage(+0.0f, -0.0f);
-    	upperLeftTalon.configPeakOutputVoltage(+12.0f, -12.0f);
-    	upperLeftTalon.setProfile(0);
-    	upperLeftTalon.setF(0.1097);
-    	upperLeftTalon.setP(5);
-    	upperLeftTalon.setI(1); 
-    	upperLeftTalon.setD(0.2);
+	public void initTalonSet(CANTalon mainTalon, CANTalon followerTalon, int mainProfile, int CANSpeedID){
+		mainTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		mainTalon.reverseSensor(false);
+		mainTalon.configNominalOutputVoltage(+0.0f, -0.0f);
+		mainTalon.configPeakOutputVoltage(+12.0f, -12.0f);
+		mainTalon.setProfile(CANSpeedID);
+		//mainTalon.setF(0.1097);
+		mainTalon.setP(.8);
+		mainTalon.setI(.01); 
+		mainTalon.setD(0);
     	
-    	lowerLeftTalon.changeControlMode(TalonControlMode.Follower);
-    	lowerLeftTalon.set(0);
-	}
-	public void rightSideControll(double power){
-		upperRightTalon.set(-power);
-		
-    	upperRightTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	upperRightTalon.reverseSensor(false);
-    	upperRightTalon.configNominalOutputVoltage(+0.0f, -0.0f);
-    	upperRightTalon.configPeakOutputVoltage(+12.0f, -12.0f);
-    	upperRightTalon.setProfile(0);
-    	upperRightTalon.setF(0.1097);
-    	upperRightTalon.setP(5);
-    	upperRightTalon.setI(1); 
-    	upperRightTalon.setD(0.2);
-    	
-    	lowerRightTalon.changeControlMode(TalonControlMode.Follower);
-    	lowerRightTalon.set(3);
+		followerTalon.changeControlMode(TalonControlMode.Follower);
+		followerTalon.set(mainProfile);		
 	}
 	public void drive(double powerL, double powerR){
-			leftSideControll(powerL);
-			rightSideControll(powerR);
+		upperLeftTalon.set(powerL);
+		upperRightTalon.set(-powerR);
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
