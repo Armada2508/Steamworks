@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class BallPickerUpper extends Command {
-	Boolean BallPickerUpperBoo = true;
+	Boolean BallPickerUpperBoo = false;
 
 	public BallPickerUpper() {
 		// Use requires() here to declare subsystem dependencies
@@ -16,11 +16,16 @@ public class BallPickerUpper extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		BallPickerUpperBoo = !BallPickerUpperBoo;	
+		//BallPickerUpperBoo = !BallPickerUpperBoo;	
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		while (Robot.oi.b.get() == true) {
+			BallPickerUpperBoo = !BallPickerUpperBoo;
+			System.out.println(Math.random()*10);
+		} 
+		
 		if (BallPickerUpperBoo == true) {
 			Robot.oi.ballRunner.set(-1);
 			//BallPickerUpperBoo = false;

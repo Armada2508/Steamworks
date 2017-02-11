@@ -26,7 +26,7 @@ public class OI {
 	//TODO: Remove this, OI should not have any CANTalon 
 	public CANTalon ballRunner = new CANTalon(2);
 	public Button a = new JoystickButton(stick, 1);
-	Button b = new JoystickButton(stick, 2);
+	public Button b = new JoystickButton(stick, 2);
 	public Button x = new JoystickButton(stick, 3);
 	Button y = new JoystickButton(stick, 4);
 	Button lb = new JoystickButton(stick, 5);
@@ -46,7 +46,8 @@ public class OI {
 
 	public OI() {
 		x.toggleWhenPressed(new GearOC());
-		a.toggleWhenActive(new BallPickerUpper());
+		//a.toggleWhenActive(new BallPickerUpper());
+		
 	}
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

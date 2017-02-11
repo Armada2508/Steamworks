@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team2508.robot.commands.BallPickerUpper;
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
@@ -93,6 +94,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		Robot.driveSystem.drive(.01,.01);
+		try {
+			wait(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Scheduler.getInstance().run();
 	}
 
@@ -107,6 +115,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		Command driveRobotCMD = new DriveRobot();
 		driveRobotCMD.start();
+		Command BallPickerUpperCMD = new BallPickerUpper();
+		BallPickerUpperCMD.start();
 	}
 
 	/**
