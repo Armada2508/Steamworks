@@ -28,8 +28,8 @@ public class OI {
 	public Button a = new JoystickButton(stick, 1);
 	public Button b = new JoystickButton(stick, 2);
 	public Button x = new JoystickButton(stick, 3);
-	Button y = new JoystickButton(stick, 4);
-	Button lb = new JoystickButton(stick, 5);
+	public Button y = new JoystickButton(stick, 4);
+	public Button lb = new JoystickButton(stick, 5);
 	Button rb = new JoystickButton(stick, 6);
 	public Button back = new JoystickButton(stick, 7);
 	public Button start = new JoystickButton(stick, 8);
@@ -46,8 +46,9 @@ public class OI {
 
 	public OI() {
 		x.toggleWhenPressed(new GearOC());
-		//a.toggleWhenActive(new BallPickerUpper());
-		
+		b.toggleWhenPressed(new BallPickerUpper());
+		lb.toggleWhenPressed(new Winch());
+		y.toggleWhenPressed(new Winch(-1));
 	}
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

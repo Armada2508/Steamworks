@@ -115,8 +115,6 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		Command driveRobotCMD = new DriveRobot();
 		driveRobotCMD.start();
-		Command BallPickerUpperCMD = new BallPickerUpper();
-		BallPickerUpperCMD.start();
 	}
 
 	/**
