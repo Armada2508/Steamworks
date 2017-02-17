@@ -39,7 +39,7 @@ public class GearOC extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //1 return !(Robot.oi.x.get());
+        //1 return !(Robot.oi.x.get()); 
     	 return false;
         
         
