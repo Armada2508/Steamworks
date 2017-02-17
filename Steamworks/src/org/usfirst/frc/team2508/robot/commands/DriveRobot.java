@@ -19,7 +19,6 @@ public class DriveRobot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
 
@@ -33,6 +32,7 @@ public class DriveRobot extends Command {
     		RCalc1 -= Robot.oi.stick.getRawAxis(4);
     		LCalc1 += Robot.oi.stick.getRawAxis(4);
     		Robot.driveSystem.drive(LCalc1,RCalc1);
+    		//System.out.println("open2");
     	
     }
 

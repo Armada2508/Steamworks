@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2508.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,9 +10,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team2508.robot.commands.BallPickerUpper;
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 
@@ -44,7 +45,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
-    	
+    	CameraServer.getInstance().startAutomaticCapture();
 		}
 
 	/**
@@ -115,6 +116,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		Command driveRobotCMD = new DriveRobot();
 		driveRobotCMD.start();
+		Command winchCMD = new Winch();
+		winchCMD.start();
 	}
 
 	/**

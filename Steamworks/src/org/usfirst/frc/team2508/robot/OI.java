@@ -46,9 +46,9 @@ public class OI {
 
 	public OI() {
 		x.toggleWhenPressed(new GearOC());
-		b.toggleWhenPressed(new BallPickerUpper());
-		lb.toggleWhenPressed(new Winch());
-		y.toggleWhenPressed(new Winch(-1));
+		//x.whenReleased(new GearOC());
+		//b.toggleWhenPressed(new BallPickerUpper());
+		//a.toggleWhenPressed(new GearLifter());
 	}
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

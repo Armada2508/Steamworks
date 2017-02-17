@@ -13,7 +13,7 @@ public class StartUp extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	addParallel(new DriveRobot());
-    	addParallel(new BallPickerUpper());
+    	addParallel(new GearLifter());
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

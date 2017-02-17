@@ -3,6 +3,7 @@ package org.usfirst.frc.team2508.robot.commands;
 import org.usfirst.frc.team2508.robot.Robot;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,37 +13,45 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Winch extends Command {
 
 	CANTalon winch = new CANTalon(5);
-	private double sped=0;
-    public Winch() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this(1);
-    }
-    public Winch(double speed){
-    	sped = speed;
-    }
+	CANTalon winchFollower = new CANTalon(2);
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	winch.set(sped);
-    }
+	public Winch() {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		winchFollower.changeControlMode(TalonControlMode.Follower);
+		winchFollower.set(5);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	return (!(Robot.oi.y.get())&&!(Robot.oi.lb.get()));
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		if (Robot.oi.stick.getRawAxis(2) > 0 && Robot.oi.stick.getRawAxis(3) == 0) {
+			winch.set(-1);
+		}
+		if (Robot.oi.stick.getRawAxis(3) > 0 && Robot.oi.stick.getRawAxis(2) == 0) {
+			winch.set(1);
+		}
+		if (Robot.oi.stick.getRawAxis(3) == 0 && Robot.oi.stick.getRawAxis(2) == 0) {
+			winch.set(0);
+		}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	winch.set(0);
-    }
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+		winch.set(0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }
