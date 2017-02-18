@@ -1,12 +1,12 @@
 package org.usfirst.frc.team2508.robot;
 
+//import org.usfirst.frc.team2508.robot.subsystems.*;
+import org.usfirst.frc.team2508.robot.commands.GearOC;
+
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-import org.usfirst.frc.team2508.robot.commands.*;
-//import org.usfirst.frc.team2508.robot.subsystems.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator

@@ -1,6 +1,13 @@
 
 package org.usfirst.frc.team2508.robot;
 
+import org.usfirst.frc.team2508.robot.commands.DriveRobot;
+
+import org.usfirst.frc.team2508.robot.commands.Winch;
+import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2508.robot.commands.Autonomous;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -9,12 +16,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2508.robot.commands.DriveRobot;
-import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2508.robot.commands.Winch;
-import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,15 +26,16 @@ import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 	//TODO: Remove all the example stuff
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSystem driveSystem = new DriveSystem();
 	public static OI oi;
 	
 	public static final Compressor mainCompressor = new Compressor(0);
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	SendableChooser chooser = new SendableChooser();
+	String leftSide = "Left Side Auto";
+	
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -41,7 +43,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addDefault(leftSide, leftSide);
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
@@ -76,7 +78,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		if(chooser.getSelected() == leftSide) {
+			autonomousCommand = new Autonomous();
+		}
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

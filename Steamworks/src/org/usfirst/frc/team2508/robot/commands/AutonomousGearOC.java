@@ -1,52 +1,49 @@
 package org.usfirst.frc.team2508.robot.commands;
 
-import org.usfirst.frc.team2508.robot.Robot;
+import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
 
+//import org.usfirst.frc.team2508.robot.Robot;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveRobot extends Command {
-	
-	public int count = 2;
-	
-    public DriveRobot() {
+public class AutonomousGearOC extends Command {
+
+	GearGripper gearGripper;
+	boolean finished;
+    public AutonomousGearOC(GearGripper gearGripper, boolean finished) {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveSystem);
+    	this.gearGripper = gearGripper;
+    	this.finished = finished;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
+    protected void initialize() {}
 
     // Called repeatedly when this Command is scheduled to run
-	
     protected void execute() {
-    	
-    		double RCalc1, LCalc1;
-    		RCalc1 = Robot.oi.stick.getRawAxis(1);
-    		LCalc1 = Robot.oi.stick.getRawAxis(1);
-    		RCalc1 -= Robot.oi.stick.getRawAxis(4);
-    		LCalc1 += Robot.oi.stick.getRawAxis(4);
-    		Robot.driveSystem.drive(LCalc1,RCalc1);
-    		//System.out.println("open2");
-    	
+    	gearGripper.set(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        //1 return !(Robot.oi.x.get()); 
+    	 return finished; 
+        
+        
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	gearGripper.set(false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+
     }
 }

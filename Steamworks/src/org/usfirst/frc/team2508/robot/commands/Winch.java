@@ -2,9 +2,8 @@ package org.usfirst.frc.team2508.robot.commands;
 
 import org.usfirst.frc.team2508.robot.Robot;
 
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
-
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

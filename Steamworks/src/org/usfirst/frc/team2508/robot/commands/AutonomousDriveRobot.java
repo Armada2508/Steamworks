@@ -2,16 +2,23 @@ package org.usfirst.frc.team2508.robot.commands;
 
 import org.usfirst.frc.team2508.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveRobot extends Command {
+public class AutonomousDriveRobot extends Command {
 	
-	public int count = 2;
+	double driveTime;
 	
-    public DriveRobot() {
+	Timer timer = new Timer();
+	double initialTime;
+	double speed;
+    public AutonomousDriveRobot(double time, double speed) {
+    	this.speed = speed;
+    	this.driveTime = time;
+    	this.initialTime = timer.get();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSystem);
@@ -26,19 +33,14 @@ public class DriveRobot extends Command {
 	
     protected void execute() {
     	
-    		double RCalc1, LCalc1;
-    		RCalc1 = Robot.oi.stick.getRawAxis(1);
-    		LCalc1 = Robot.oi.stick.getRawAxis(1);
-    		RCalc1 -= Robot.oi.stick.getRawAxis(4);
-    		LCalc1 += Robot.oi.stick.getRawAxis(4);
-    		Robot.driveSystem.drive(LCalc1,RCalc1);
-    		//System.out.println("open2");
+    	Robot.driveSystem.drive(speed,speed);
+    	//System.out.println("open2");
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return (initialTime + driveTime < timer.get());
     }
 
     // Called once after isFinished returns true
