@@ -6,6 +6,8 @@ import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
+import org.usfirst.frc.team2508.robot.subsystems.GearLifter;
 import org.usfirst.frc.team2508.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -27,6 +29,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//TODO: Remove all the example stuff
 	public static final DriveSystem driveSystem = new DriveSystem();
+	public static final GearGripper gearGripper = new GearGripper();
+	public static final GearLifter gearLifter = new GearLifter();
 	public static OI oi;
 	
 	public static final Compressor mainCompressor = new Compressor(0);

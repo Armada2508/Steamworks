@@ -26,6 +26,7 @@ public class AutonomousDriveRobot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveSystem.drive(speed,speed);
     }
 
 
@@ -33,7 +34,6 @@ public class AutonomousDriveRobot extends Command {
 	
     protected void execute() {
     	
-    	Robot.driveSystem.drive(speed,speed);
     	//System.out.println("open2");
     	
     }
@@ -45,6 +45,7 @@ public class AutonomousDriveRobot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveSystem.drive(0,0);
     }
 
     // Called when another command which requires one or more of the same
