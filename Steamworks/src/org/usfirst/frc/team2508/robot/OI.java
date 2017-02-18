@@ -3,7 +3,9 @@ package org.usfirst.frc.team2508.robot;
 //import org.usfirst.frc.team2508.robot.subsystems.*;
 import org.usfirst.frc.team2508.robot.commands.GearOC;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+
+//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
