@@ -1,0 +1,63 @@
+plugins {
+    id "java"
+    id "groovy"
+    id "idea"
+    id "jaci.openrio.gradle.GradleRIO" version "2017.1.1"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
+
+frc {
+    team = "2508"
+    robotClass = "org.usfirst.frc.team2508.robot.Robot"
+
+    deploy = false                         // Whether to deploy to the RoboRIO or not. By default, this is true.
+    // deployTimeout = 3                     // The time (in seconds) to wait before timing out on an SSH connection
+    // deployDirectory = "/home/lvuser"      // The directory to deploy your jar to
+    // rioIP = "10.53.33.2"                  // The IP Address of your RoboRIO. Automatically calculated from team number if not set
+    // rioHost = "my_roborio.local"          // The Hostname of your RoboRIO. Automatically calculated from team number if not set
+
+    // robotCommand = "./something_else"     // The command to run when starting your robot program. This is calculated by default, with runArguments
+    // runArguments = "--hello"              // The command-line arguments to launch your jar with. By default, there are none. Not used if robotCommand set
+    // jvmArguments = "-Xmx90m"              // The arguments to give to the JVM. By default, there are none. Not used if robotCommand is set.
+    // useDebugCommand = true                // Set to true if you want to use a remote debugger with your robot program. Not used if robotCommand is set.
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.8'
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
+    compile wpilib()
+    compile talonSrx()
+
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
+}
+
+def robotManifest = {
+    attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+    attributes 'Robot-Class': frc.robotClass
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2.1'
+}
