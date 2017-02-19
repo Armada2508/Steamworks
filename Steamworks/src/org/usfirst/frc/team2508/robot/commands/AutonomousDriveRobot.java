@@ -10,15 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutonomousDriveRobot extends Command {
 	
-	double driveTime;
-	
-	Timer timer = new Timer();
-	double initialTime;
-	double speed;
-    public AutonomousDriveRobot(double time, double speed) {
-    	this.speed = speed;
-    	this.driveTime = time;
-    	this.initialTime = timer.get();
+	double leftSpeed;
+	double rightSpeed;
+    public AutonomousDriveRobot(double leftSpeed, double rightSpeed) {
+    	this.leftSpeed = leftSpeed;
+    	this.rightSpeed = rightSpeed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSystem);
@@ -26,7 +22,7 @@ public class AutonomousDriveRobot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveSystem.drive(speed,speed);
+    	Robot.driveSystem.drive(leftSpeed, rightSpeed);
     }
 
 
@@ -40,12 +36,12 @@ public class AutonomousDriveRobot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (initialTime + driveTime < timer.get());
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveSystem.drive(0,0);
+    	
     }
 
     // Called when another command which requires one or more of the same

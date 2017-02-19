@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
-    	CameraServer.getInstance().startAutomaticCapture();
+    	//CameraServer.getInstance().startAutomaticCapture();
 		}
 
 	/**
@@ -103,13 +103,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Robot.driveSystem.drive(.01,.01);
-		try {
-			wait(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		Robot.driveSystem.drive(.01,.01);
+//		try {
+//			wait(100);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		Scheduler.getInstance().run();
 	}
 

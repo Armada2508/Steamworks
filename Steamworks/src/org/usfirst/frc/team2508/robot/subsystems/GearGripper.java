@@ -18,6 +18,6 @@ public class GearGripper extends Subsystem {
 	public void initDefaultCommand() {}
 	
 	public void set(boolean state) {
-    	solenoid.set(state ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+    	solenoid.set(state ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
 	}
 }

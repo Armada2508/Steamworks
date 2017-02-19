@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class GearOC extends Command {
-	DoubleSolenoid ocDouble = new DoubleSolenoid(1, 2);
+	//DoubleSolenoid ocDouble = new DoubleSolenoid(1, 2);
 	public boolean GearT = false;
 
     public GearOC() {
@@ -27,14 +27,14 @@ public class GearOC extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (GearT = false){
-    		ocDouble.set(DoubleSolenoid.Value.kReverse);
-    		System.out.println("open");
-    	}
-    	if (GearT = true){
-    		ocDouble.set(DoubleSolenoid.Value.kForward);
-    		System.out.println("close");
-    	}    	
+//    	if (GearT = false){
+//    		ocDouble.set(DoubleSolenoid.Value.kReverse);
+//    		System.out.println("open");
+//    	}
+//    	if (GearT = true){
+//    		ocDouble.set(DoubleSolenoid.Value.kForward);
+//    		System.out.println("close");
+//    	}    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
