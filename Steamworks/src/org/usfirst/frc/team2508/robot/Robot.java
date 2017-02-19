@@ -3,30 +3,19 @@ package org.usfirst.frc.team2508.robot;
 
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 
+import org.usfirst.frc.team2508.robot.subsystems.GearLifter;
 import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
-import org.usfirst.frc.team2508.robot.subsystems.GearLifter;
 import org.usfirst.frc.team2508.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2508.robot.commands.DriveRobot;
-import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2508.robot.commands.GearLifter;
-import org.usfirst.frc.team2508.robot.commands.GearOC;
-import org.usfirst.frc.team2508.robot.commands.Winch;
-import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -110,7 +99,7 @@ public class Robot extends IterativeRobot {
 		// new gear grabber
 		//Command gearPick = new GearOC();
 		// new gear lifter
-		Command gearLift = new GearLifter();
+		Command gearLift = new org.usfirst.frc.team2508.robot.commands.GearLifter();
 		// picks up gear
 		if (grip) {
 			// picks up gear

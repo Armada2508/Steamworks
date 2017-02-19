@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2508.robot;
 
 //import org.usfirst.frc.team2508.robot.subsystems.*;
+import org.usfirst.frc.team2508.robot.commands.GearLifter;
 import org.usfirst.frc.team2508.robot.commands.GearOC;
 
 import com.ctre.CANTalon;
