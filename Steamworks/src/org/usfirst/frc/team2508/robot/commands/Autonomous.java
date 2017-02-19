@@ -12,7 +12,13 @@ public class Autonomous extends CommandGroup {
         addSequential(new AutonomousDriveRobot(-0.2, -0.2));// left speed, right speed
         addSequential(new WaitCommand(10));
         addSequential(new AutonomousDriveRobot(0, 0));
-        //Turn
-        //Drive forward
+        addSequential(new AutonomousDriveRobot(-0.2, 0.2)); // Turn
+        addSequential(new WaitCommand(3));
+        addSequential(new AutonomousDriveRobot(-0.2, -0.2)); //Drive Forward
+        addSequential(new WaitCommand(3));
+        addSequential(new AutonomousDriveRobot(0, 0));
+        addSequential(new AutonomousGearLifter(false)); //Tell the subsystem to lower the gear
+        addSequential(new AutonomousGearOC(false)); //Tell the subsystem to drop the gear
+        //Add the vision stuff
     }
 }
