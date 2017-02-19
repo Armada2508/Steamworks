@@ -13,11 +13,20 @@ import org.usfirst.frc.team2508.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2508.robot.commands.DriveRobot;
+import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2508.robot.commands.GearLifter;
+import org.usfirst.frc.team2508.robot.commands.GearOC;
+import org.usfirst.frc.team2508.robot.commands.Winch;
+import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,14 +41,14 @@ public class Robot extends IterativeRobot {
 	public static final GearGripper gearGripper = new GearGripper();
 	public static final GearLifter gearLifter = new GearLifter();
 	public static OI oi;
-	
+
 	public static final Compressor mainCompressor = new Compressor(0);
 
 	Command autonomousCommand;
 	SendableChooser chooser = new SendableChooser();
 	String leftSide = "Left Side Auto";
-	
-	
+
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -97,20 +106,36 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
+	public void aControl(boolean grip, boolean lift, double wheelLeft, double wheelRight) {
+		// new gear grabber
+		//Command gearPick = new GearOC();
+		// new gear lifter
+		Command gearLift = new GearLifter();
+		// picks up gear
+		if (grip) {
+			// picks up gear
+			//gearPick.start();
+		} else {
+			// releases gear
+			//gearPick.cancel();
+		}
+		if (lift) {
+			// lifts gear
+			gearLift.start();
+		} else {
+			// drops gear lift
+			gearLift.cancel();
+		}
+
+		Robot.driveSystem.drive(wheelLeft,wheelRight);
+	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	@Override
 	public void autonomousPeriodic() {
-//		Robot.driveSystem.drive(.01,.01);
-//		try {
-//			wait(100);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+
 		Scheduler.getInstance().run();
 	}
 
@@ -137,7 +162,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
-	
+
 	/**
 	 * This function is called periodically during test mode
 	 */
