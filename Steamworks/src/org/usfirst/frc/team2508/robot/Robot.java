@@ -4,6 +4,7 @@ package org.usfirst.frc.team2508.robot;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2508.robot.commands.GearLifter;
+import org.usfirst.frc.team2508.robot.commands.GearOC;
 import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
@@ -46,6 +49,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
     	CameraServer.getInstance().startAutomaticCapture();
+    	
 		}
 
 	/**
@@ -76,6 +80,26 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		//aControl(Hold Gear, Lift Gear, Left Wheel Power, Right Wheel Power);
+		//straight past baseline
+		aControl(true, true, .3, .3);
+		Timer.delay(3000);
+		//right turn
+		aControl(true, true, .3, 0);
+		Timer.delay(750);
+		//drive to peg
+		aControl(true, true, .2, .2);
+		Timer.delay(1000);
+		//release gear
+		aControl(false, true, 0, 0);
+		Timer.delay(1000);
+		//drop gear lift
+		aControl(false, false, 0, 0);
+		Timer.delay(1000);
+		//back up a bit
+		aControl(false, false, -0.3, -0.3);
+
+		
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -89,19 +113,36 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
+	public void aControl(boolean grip, boolean lift, double wheelLeft, double wheelRight) {
+		// new gear grabber
+		//Command gearPick = new GearOC();
+		// new gear lifter
+		Command gearLift = new GearLifter();
+		// picks up gear
+		if (grip) {
+			// picks up gear
+			//gearPick.start();
+		} else {
+			// releases gear
+			//gearPick.cancel();
+		}
+		if (lift) {
+			// lifts gear
+			gearLift.start();
+		} else {
+			// drops gear lift
+			gearLift.cancel();
+		}
+		
+		Robot.driveSystem.drive(wheelLeft,wheelRight);
+	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Robot.driveSystem.drive(.01,.01);
-		try {
-			wait(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		Scheduler.getInstance().run();
 	}
 
