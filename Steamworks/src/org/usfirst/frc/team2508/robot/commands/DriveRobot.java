@@ -27,10 +27,10 @@ public class DriveRobot extends Command {
     protected void execute() {
     	
     		double RCalc1, LCalc1;
-    		RCalc1 = Robot.oi.stick.getRawAxis(1);
-    		LCalc1 = Robot.oi.stick.getRawAxis(1);
-    		RCalc1 -= Robot.oi.stick.getRawAxis(4);
-    		LCalc1 += Robot.oi.stick.getRawAxis(4);
+    		RCalc1 = (Robot.oi.stick.getRawAxis(1));
+    		LCalc1 = (Robot.oi.stick.getRawAxis(1));
+    		RCalc1 -= (Robot.oi.stick.getRawAxis(4)/2);
+    		LCalc1 += (Robot.oi.stick.getRawAxis(4)/2);
     		Robot.driveSystem.drive(LCalc1,RCalc1);
     		//System.out.println("open2");
     	

@@ -24,22 +24,17 @@ public class GearOC extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(GearT){
-            	ocDouble.set(DoubleSolenoid.Value.kReverse);
+    		GearOpen.set(true);
+    		GearClose.set(false);
             } else {                	
-                ocDouble.set(DoubleSolenoid.Value.kForward);  
+            	GearOpen.set(false);
+        		GearClose.set(true);
     	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if (GearT = false){
-//    		ocDouble.set(DoubleSolenoid.Value.kReverse);
-//    		System.out.println("open");
-//    	}
-//    	if (GearT = true){
-//    		ocDouble.set(DoubleSolenoid.Value.kForward);
-//    		System.out.println("close");
-//    	}    	
+ 	
     }
 
     // Make this return true when this Command no longer needs to run execute()

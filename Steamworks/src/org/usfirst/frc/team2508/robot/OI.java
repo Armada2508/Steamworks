@@ -45,8 +45,8 @@ public class OI {
 
 
 	public OI() {
-		x.whenReleased(new GearOC(true));
-		//y.whenReleased(new GearOpen());
+		//x.whenReleased(new GearOC(true));
+		//y.whenReleased(new GearOC(false));
 		//x.whenReleased(new GearOC());
 		//b.toggleWhenPressed(new BallPickerUpper());
 		a.toggleWhenPressed(new GearLifter());
