@@ -14,7 +14,7 @@ import org.usfirst.frc.team2508.robot.util.VisionService;
 public class AutonomousCameraAngleCorrection extends Command {
 
     VisionService visionService;
-    boolean finsished;
+    boolean finished;
 
     public AutonomousCameraAngleCorrection() {
         requires(Robot.driveSystem);
@@ -36,7 +36,7 @@ public class AutonomousCameraAngleCorrection extends Command {
         double angle = location.getAngle();
         Type type = location.getType();
         if (angle < 0.1) {
-            finsihed = true;
+            finished = true;
         }
         correct(angle);
 

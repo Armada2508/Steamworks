@@ -14,7 +14,7 @@ import org.usfirst.frc.team2508.robot.util.VisionService;
 public class AutonomousCameraDrive extends Command {
 
     VisionService visionService;
-    boolean finsished;
+    boolean finished;
 
     public AutonomousCameraDrive() {
         requires(Robot.driveSystem);
