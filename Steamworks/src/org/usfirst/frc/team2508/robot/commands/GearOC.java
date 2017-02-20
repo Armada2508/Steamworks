@@ -18,7 +18,7 @@ public class GearOC extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	OC = GearT;
-    	
+
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +26,7 @@ public class GearOC extends Command {
     	if(GearT){
     		GearOpen.set(true);
     		GearClose.set(false);
-            } else {                	
+            } else {
             	GearOpen.set(false);
         		GearClose.set(true);
     	}
@@ -34,21 +34,21 @@ public class GearOC extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
- 	
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-         //return !(Robot.oi.x.get()); 
-    	 return false; 
-        
-        
+         //return !(Robot.oi.x.get());
+    	 return false;
+
+
     }
 
     // Called once after isFinished returns true
     protected void end() {
 
-    	
+
     }
 
     // Called when another command which requires one or more of the same

@@ -1,23 +1,21 @@
 
 package org.usfirst.frc.team2508.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
+import org.usfirst.frc.team2508.robot.commands.DriveRobot;
+
+import org.usfirst.frc.team2508.robot.subsystems.GearLifter;
+import org.usfirst.frc.team2508.robot.commands.Winch;
+import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
+import org.usfirst.frc.team2508.robot.commands.Autonomous;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2508.robot.commands.DriveRobot;
-import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2508.robot.commands.GearLifter;
-import org.usfirst.frc.team2508.robot.commands.GearOC;
-import org.usfirst.frc.team2508.robot.commands.Winch;
-import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,14 +26,17 @@ import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 	//TODO: Remove all the example stuff
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSystem driveSystem = new DriveSystem();
+	public static final GearGripper gearGripper = new GearGripper();
+	public static final GearLifter gearLifter = new GearLifter();
 	public static OI oi;
-	
+
 	public static final Compressor mainCompressor = new Compressor(0);
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser chooser = new SendableChooser();
+	String leftSide = "Left Side Auto";
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,12 +45,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addDefault(leftSide, leftSide);
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
-    	CameraServer.getInstance().startAutomaticCapture();
-    	
+    	//CameraServer.getInstance().startAutomaticCapture();
 		}
 
 	/**
@@ -80,27 +80,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//aControl(Hold Gear, Lift Gear, Left Wheel Power, Right Wheel Power);
-		//straight past baseline
-		aControl(true, true, .3, .3);
-		Timer.delay(3000);
-		//right turn
-		aControl(true, true, .3, 0);
-		Timer.delay(750);
-		//drive to peg
-		aControl(true, true, .2, .2);
-		Timer.delay(1000);
-		//release gear
-		aControl(false, true, 0, 0);
-		Timer.delay(1000);
-		//drop gear lift
-		aControl(false, false, 0, 0);
-		Timer.delay(1000);
-		//back up a bit
-		aControl(false, false, -0.3, -0.3);
-
-		
-		autonomousCommand = chooser.getSelected();
+		if(chooser.getSelected() == leftSide) {
+			autonomousCommand = new Autonomous();
+		}
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -117,7 +99,7 @@ public class Robot extends IterativeRobot {
 		// new gear grabber
 		//Command gearPick = new GearOC();
 		// new gear lifter
-		Command gearLift = new GearLifter();
+		Command gearLift = new org.usfirst.frc.team2508.robot.commands.GearLifter();
 		// picks up gear
 		if (grip) {
 			// picks up gear
@@ -133,7 +115,7 @@ public class Robot extends IterativeRobot {
 			// drops gear lift
 			gearLift.cancel();
 		}
-		
+
 		Robot.driveSystem.drive(wheelLeft,wheelRight);
 	}
 
@@ -169,7 +151,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
-	
+
 	/**
 	 * This function is called periodically during test mode
 	 */
