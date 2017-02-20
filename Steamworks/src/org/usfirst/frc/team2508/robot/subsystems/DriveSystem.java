@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2508.robot.subsystems;
 
+import java.util.TimerTask;
+import java.util.Timer;
+
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -35,15 +38,15 @@ public class DriveSystem extends Subsystem {
 	// here. Call these from Commands.
 	
 	public void initTalonSet(CANTalon mainTalon, CANTalon followerTalon, int mainProfile, int CANSpeedID){
-		mainTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		mainTalon.reverseSensor(false);
-		mainTalon.configNominalOutputVoltage(+0.0f, -0.0f);
-		mainTalon.configPeakOutputVoltage(+12.0f, -12.0f);
-		mainTalon.setProfile(CANSpeedID);
-		//mainTalon.setF(0.1097);
-		mainTalon.setP(.8);
-		mainTalon.setI(.01); 
-		mainTalon.setD(0);
+//		mainTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+//		mainTalon.reverseSensor(false);
+//		mainTalon.configNominalOutputVoltage(+0.0f, -0.0f);
+//		mainTalon.configPeakOutputVoltage(+12.0f, -12.0f);
+//		mainTalon.setProfile(CANSpeedID);
+//		//mainTalon.setF(0.1097);
+//		mainTalon.setP(.8);
+//		mainTalon.setI(.01); 
+//		mainTalon.setD(0);
     	
 		followerTalon.changeControlMode(TalonControlMode.Follower);
 		followerTalon.set(mainProfile);		
@@ -52,6 +55,7 @@ public class DriveSystem extends Subsystem {
 		upperLeftTalon.set(powerL);
 		upperRightTalon.set(-powerR);
 	}
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());

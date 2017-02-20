@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2508.robot;
 
 //import org.usfirst.frc.team2508.robot.subsystems.*;
+import org.usfirst.frc.team2508.robot.commands.GearLifter;
 import org.usfirst.frc.team2508.robot.commands.GearOC;
 
 import com.ctre.CANTalon;
@@ -47,10 +48,11 @@ public class OI {
 
 
 	public OI() {
-		x.toggleWhenPressed(new GearOC());
+		//x.whenReleased(new GearOC(true));
+		//y.whenReleased(new GearOC(false));
 		//x.whenReleased(new GearOC());
 		//b.toggleWhenPressed(new BallPickerUpper());
-		//a.toggleWhenPressed(new GearLifter());
+		a.toggleWhenPressed(new GearLifter());
 	}
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
