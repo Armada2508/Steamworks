@@ -1,13 +1,11 @@
 
 package org.usfirst.frc.team2508.robot;
 
-import org.usfirst.frc.team2508.robot.commands.DriveRobot;
+import org.usfirst.frc.team2508.robot.commands.*;
 
 import org.usfirst.frc.team2508.robot.subsystems.GearLifter;
-import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
-import org.usfirst.frc.team2508.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -35,7 +33,8 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser chooser = new SendableChooser();
-	String leftSide = "Left Side Auto";
+	private final String leftSide = "Left Side Auto";
+	private final String center = "Center Auto";
 
 
 	/**
@@ -45,8 +44,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault(leftSide, leftSide);
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addDefault(leftSide, 1);
+		chooser.addDefault(center, 2);
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
     	//CameraServer.getInstance().startAutomaticCapture();
@@ -80,8 +79,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		if(chooser.getSelected() == leftSide) {
-			autonomousCommand = new Autonomous();
+//		if(chooser.getSelected() == leftSide) {
+//			autonomousCommand = new Autonomous();
+//		}
+		switch ((int) chooser.getSelected()) {
+			case 1 :
+				autonomousCommand = new AutonomousLeftSide();
+				break;
+			case 2 :
+				autonomousCommand = new AutonomousCenter();
+				break;
+			default :
+				System.out.println("Invalid Autonomous State: " + chooser.getSelected());
 		}
 
 		/*
