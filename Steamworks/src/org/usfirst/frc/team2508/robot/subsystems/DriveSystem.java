@@ -48,7 +48,7 @@ public class DriveSystem extends Subsystem {
 		mainTalon.set(0);
 		
 		mainTalon.setP(0.5);
-		mainTalon.setI(0.001); 
+		mainTalon.setI(0.002); 
 		mainTalon.setD(0);
 		mainTalon.setF(0);
 		mainTalon.setCloseLoopRampRate(0.5);
