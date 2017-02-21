@@ -23,8 +23,8 @@ public class DriveSystem extends Subsystem {
 		lowerLeftTalon = new CANTalon(1);
 		upperRightTalon = new CANTalon(3);
 		lowerRightTalon = new CANTalon(4);
-		initTalonSet(upperLeftTalon, lowerLeftTalon, 0, 0);
-		initTalonSet(upperRightTalon, lowerRightTalon, 3, 1);
+//		initTalonSet(upperLeftTalon, lowerLeftTalon, 0, 0);
+//		initTalonSet(upperRightTalon, lowerRightTalon, 3, 1);
 	}
 	
 

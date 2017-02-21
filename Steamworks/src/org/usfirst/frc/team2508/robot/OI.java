@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2508.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
+
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -13,6 +16,8 @@ import org.usfirst.frc.team2508.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	public DoubleSolenoid ocDouble = new DoubleSolenoid(1, 2);
+	public Solenoid liftSolenoid = new Solenoid(0);
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -45,7 +50,7 @@ public class OI {
 
 
 	public OI() {
-		x.toggleWhenPressed(new GearOC());
+//		/x.toggleWhenPressed(new GearOC());
 		//x.whenReleased(new GearOC());
 		//b.toggleWhenPressed(new BallPickerUpper());
 		//a.toggleWhenPressed(new GearLifter());

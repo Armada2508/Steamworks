@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2508.robot.commands.GearLifter;
+import org.usfirst.frc.team2508.robot.commands.GearOC;
 import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
@@ -27,6 +29,8 @@ public class Robot extends IterativeRobot {
 	//TODO: Remove all the example stuff
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSystem driveSystem = new DriveSystem();
+	public static final GearOC gearOCCMD = new GearOC();
+	public static final GearLifter gearLifterCMD = new GearLifter();
 	public static OI oi;
 	
 	public static final Compressor mainCompressor = new Compressor(0);
@@ -118,6 +122,11 @@ public class Robot extends IterativeRobot {
 		driveRobotCMD.start();
 		Command winchCMD = new Winch();
 		winchCMD.start();
+		Command gearOCCMD = new GearOC();
+		gearOCCMD.start();
+		Command GearLifterCMD = new GearLifter();
+		GearLifterCMD.start();
+		
 	}
 
 	/**
