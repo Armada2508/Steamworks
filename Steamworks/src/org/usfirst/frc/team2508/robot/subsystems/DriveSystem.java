@@ -4,7 +4,6 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
-//import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -23,14 +22,14 @@ public class DriveSystem extends Subsystem {
 		lowerLeftTalon = new CANTalon(1);
 		upperRightTalon = new CANTalon(3);
 		lowerRightTalon = new CANTalon(4);
-//		initTalonSet(upperLeftTalon, lowerLeftTalon, 0, 0);
-//		initTalonSet(upperRightTalon, lowerRightTalon, 3, 1);
+
 	}
 	
-
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-	
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		//setDefaultCommand(new MySpecialCommand());
+		
+	}
 	public void initTalonSet(CANTalon mainTalon, CANTalon followerTalon, int mainProfile, int CANSpeedID){
 		mainTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		mainTalon.reverseSensor(false);
@@ -48,9 +47,5 @@ public class DriveSystem extends Subsystem {
 	public void drive(double powerL, double powerR){
 		upperLeftTalon.set(powerL);
 		upperRightTalon.set(-powerR);
-	}
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
 	}
 }

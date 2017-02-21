@@ -4,6 +4,7 @@ package org.usfirst.frc.team2508.robot;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,12 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
-import org.usfirst.frc.team2508.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2508.robot.commands.GearLifter;
-import org.usfirst.frc.team2508.robot.commands.GearOC;
+import org.usfirst.frc.team2508.robot.commands.GearLG;
 import org.usfirst.frc.team2508.robot.commands.Winch;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2508.robot.subsystems.GearSystem;
+import org.usfirst.frc.team2508.robot.subsystems.AutoOutputs;
+
+//import com.ctre.CANTalon.TrajectoryPoint;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,11 +28,9 @@ import org.usfirst.frc.team2508.robot.subsystems.ExampleSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	//TODO: Remove all the example stuff
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final DriveSystem driveSystem = new DriveSystem();
-	public static final GearOC gearOCCMD = new GearOC();
-	public static final GearLifter gearLifterCMD = new GearLifter();
+	public static final DriveSystem DriveSystem = new DriveSystem();
+	public static final GearSystem GearSystem = new GearSystem();
+	public static final AutoOutputs AutoOutputs = new AutoOutputs();
 	public static OI oi;
 	
 	public static final Compressor mainCompressor = new Compressor(0);
@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
@@ -92,6 +92,29 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
+		
+		
+		//Robot.AutoOutputs.aOutputs(gearLift, gearPick, wPowerL, wPowerR);
+		Robot.AutoOutputs.aOutputs(false, true, 0, 0);
+		System.out.println("1 okay");
+		Timer.delay(.5);
+		Robot.AutoOutputs.aOutputs(false, true, .5, .5);
+		System.out.println("2 okay");
+		Timer.delay(3);
+		Robot.AutoOutputs.aOutputs(false, true, 0, .3);
+		System.out.println("3 okay");
+		Timer.delay(1);
+		Robot.AutoOutputs.aOutputs(false, true, .2, .2);
+		Timer.delay(1.5);
+		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
+		Timer.delay(1.5);
+		Robot.AutoOutputs.aOutputs(true, false, 0, 0);
+		Timer.delay(1);
+		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
+		Timer.delay(.5);
+		Robot.AutoOutputs.aOutputs(false, false, -.5, -.5);
+		Timer.delay(1);
+		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 	}
 
 	/**
@@ -99,14 +122,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Robot.driveSystem.drive(.01,.01);
-		try {
-			wait(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Scheduler.getInstance().run();
+		//TrajectoryPoint pt1 = new TrajectoryPoint
+		
+		//Robot.driveSystem.lowerLeftTalon.pushMotionProfileTrajectory(trajPt)
 	}
 
 	@Override
@@ -122,10 +140,8 @@ public class Robot extends IterativeRobot {
 		driveRobotCMD.start();
 		Command winchCMD = new Winch();
 		winchCMD.start();
-		Command gearOCCMD = new GearOC();
-		gearOCCMD.start();
-		Command GearLifterCMD = new GearLifter();
-		GearLifterCMD.start();
+		Command GearLGCMD = new GearLG();
+		GearLGCMD.start();
 		
 	}
 
