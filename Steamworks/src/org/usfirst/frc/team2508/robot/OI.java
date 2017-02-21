@@ -1,16 +1,10 @@
 package org.usfirst.frc.team2508.robot;
-
 //import org.usfirst.frc.team2508.robot.subsystems.*;
-import org.usfirst.frc.team2508.robot.commands.GearLifter;
-import org.usfirst.frc.team2508.robot.commands.GearOC;
-
-import com.ctre.CANTalon;
 
 //import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -26,8 +20,6 @@ public class OI {
 	public Joystick stick = new Joystick(0);
 	// Talon for the Ball picker upper thing
 	
-	//TODO: Remove this, OI should not have any CANTalon 
-	public CANTalon ballRunner = new CANTalon(2);
 	public Button a = new JoystickButton(stick, 1);
 	public Button b = new JoystickButton(stick, 2);
 	public Button x = new JoystickButton(stick, 3);
@@ -52,7 +44,7 @@ public class OI {
 		//y.whenReleased(new GearOC(false));
 		//x.whenReleased(new GearOC());
 		//b.toggleWhenPressed(new BallPickerUpper());
-		a.toggleWhenPressed(new GearLifter());
+		//a.toggleWhenPressed(new GearLifter());
 	}
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

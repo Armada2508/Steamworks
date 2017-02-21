@@ -14,7 +14,7 @@ public class DriveRobot extends Command {
     public DriveRobot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveSystem);
+    	requires(Robot.DriveSystem);
     }
 
     // Called just before this Command runs the first time
@@ -26,14 +26,12 @@ public class DriveRobot extends Command {
 	
     protected void execute() {
     	
-    		double RCalc1, LCalc1;
-    		RCalc1 = (Robot.oi.stick.getRawAxis(1));
-    		LCalc1 = (Robot.oi.stick.getRawAxis(1));
-    		RCalc1 -= (Robot.oi.stick.getRawAxis(4)/2);
-    		LCalc1 += (Robot.oi.stick.getRawAxis(4)/2);
-    		Robot.driveSystem.drive(LCalc1,RCalc1);
-    		//System.out.println("open2");
-    	
+		double RCalc1, LCalc1;
+		RCalc1 = Robot.oi.stick.getRawAxis(1);
+		LCalc1 = Robot.oi.stick.getRawAxis(1);
+		RCalc1 -= Robot.oi.stick.getRawAxis(4);
+		LCalc1 += Robot.oi.stick.getRawAxis(4);
+		Robot.DriveSystem.drive(LCalc1,RCalc1);    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

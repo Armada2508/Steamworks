@@ -9,11 +9,19 @@ import org.usfirst.frc.team2508.robot.subsystems.GearGripper;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2508.robot.commands.DriveRobot;
+import org.usfirst.frc.team2508.robot.commands.GearLG;
+import org.usfirst.frc.team2508.robot.commands.Winch;
+import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team2508.robot.subsystems.GearSystem;
+import org.usfirst.frc.team2508.robot.subsystems.AutoOutputs;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,10 +31,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	//TODO: Remove all the example stuff
-	public static final DriveSystem driveSystem = new DriveSystem();
-	public static final GearGripper gearGripper = new GearGripper();
-	public static final GearLifter gearLifter = new GearLifter();
+	public static final DriveSystem DriveSystem = new DriveSystem();
+	public static final GearSystem GearSystem = new GearSystem();
+	public static final AutoOutputs AutoOutputs = new AutoOutputs();
+	
 	public static OI oi;
 
 	public static final Compressor mainCompressor = new Compressor(0);
@@ -44,8 +52,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault(leftSide, 1);
-		chooser.addDefault(center, 2);
+		
+		//chooser.addDefault("Default Auto", new ExampleCommand());
+		// chooser.addObject("My Auto", new MyAutoCommand());
+		
 		SmartDashboard.putData("Auto mode", chooser);
     	mainCompressor.setClosedLoopControl(true);
     	//CameraServer.getInstance().startAutomaticCapture();
@@ -103,29 +113,32 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
-	}
-	public void aControl(boolean grip, boolean lift, double wheelLeft, double wheelRight) {
-		// new gear grabber
-		//Command gearPick = new GearOC();
-		// new gear lifter
-		Command gearLift = new org.usfirst.frc.team2508.robot.commands.GearLifter();
-		// picks up gear
-		if (grip) {
-			// picks up gear
-			//gearPick.start();
-		} else {
-			// releases gear
-			//gearPick.cancel();
-		}
-		if (lift) {
-			// lifts gear
-			gearLift.start();
-		} else {
-			// drops gear lift
-			gearLift.cancel();
-		}
-
-		Robot.driveSystem.drive(wheelLeft,wheelRight);
+		
+		
+		//Robot.AutoOutputs.aOutputs(gearLift, gearPick, wPowerL, wPowerR);
+		Robot.AutoOutputs.aOutputs(false, true, 0, 0);
+		System.out.println("1 okay");
+		Timer.delay(.8);
+		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
+		System.out.println("1 okay");
+		Timer.delay(.8);
+		Robot.AutoOutputs.aOutputs(true, true, .5, .5);
+		System.out.println("2 okay");
+		Timer.delay(4000);
+		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
+		System.out.println("3 okay");
+		Timer.delay(2);
+		Robot.AutoOutputs.aOutputs(true, true, .2, .2);
+		Timer.delay(3);
+		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
+		Timer.delay(1.5);
+		Robot.AutoOutputs.aOutputs(true, false, 0, 0);
+		Timer.delay(1);
+		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
+		Timer.delay(.5);
+		Robot.AutoOutputs.aOutputs(false, false, -.5, -.5);
+		Timer.delay(1);
+		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 	}
 
 	/**
@@ -133,8 +146,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-
-		Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -150,6 +161,9 @@ public class Robot extends IterativeRobot {
 		driveRobotCMD.start();
 		Command winchCMD = new Winch();
 		winchCMD.start();
+		Command GearLGCMD = new GearLG();
+		GearLGCMD.start();
+		
 	}
 
 	/**
