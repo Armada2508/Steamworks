@@ -17,7 +17,7 @@ public class AutonomousCameraDrive extends Command {
     boolean finished;
 
     public AutonomousCameraDrive() {
-        requires(Robot.driveSystem);
+        requires(Robot.DriveSystem);
         visionService = new VisionService();
         finished = false;
     }
@@ -36,10 +36,10 @@ public class AutonomousCameraDrive extends Command {
         double angle = location.getAngle();
         Type type = location.getType();
         if (distance > 125) {
-            Robot.driveSystem.drive(0.84, 0.84);
+            Robot.DriveSystem.drive(0.84, 0.84);
         } else if (distance > 0) {
             double speed = distance / 150;
-            Robot.driveSystem.drive(speed, speed);
+            Robot.DriveSystem.drive(speed, speed);
         }
 
         if (distance < 20) {
@@ -56,12 +56,12 @@ public class AutonomousCameraDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveSystem.drive(0, 0);
+        Robot.DriveSystem.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Robot.driveSystem.drive(0, 0);
+        Robot.DriveSystem.drive(0, 0);
     }
 }

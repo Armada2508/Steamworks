@@ -17,12 +17,12 @@ public class AutonomousDriveRobot extends Command {
     	this.rightSpeed = rightSpeed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveSystem);
+    	requires(Robot.DriveSystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveSystem.drive(leftSpeed, rightSpeed);
+    	Robot.DriveSystem.drive(leftSpeed, rightSpeed);
     }
 
 

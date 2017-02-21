@@ -92,16 +92,16 @@ public class Robot extends IterativeRobot {
 //		if(chooser.getSelected() == leftSide) {
 //			autonomousCommand = new Autonomous();
 //		}
-		switch ((int) chooser.getSelected()) {
-			case 1 :
-				autonomousCommand = new AutonomousLeftSide();
-				break;
-			case 2 :
-				autonomousCommand = new AutonomousCenter();
-				break;
-			default :
-				System.out.println("Invalid Autonomous State: " + chooser.getSelected());
-		}
+//		switch ((int) chooser.getSelected()) {
+//			case 1 :
+//				autonomousCommand = new AutonomousLeftSide();
+//				break;
+//			case 2 :
+//				autonomousCommand = new AutonomousCenter();
+//				break;
+//			default :
+//				System.out.println("Invalid Autonomous State: " + chooser.getSelected());
+//		}
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot {
 		Timer.delay(.8);
 		Robot.AutoOutputs.aOutputs(true, true, .5, .5);
 		System.out.println("2 okay");
-		Timer.delay(4000);
+		Timer.delay(4);
 		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
 		System.out.println("3 okay");
 		Timer.delay(2);

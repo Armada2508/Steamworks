@@ -12,7 +12,7 @@ public class AutonomousGearLifter extends Command {
 
 	boolean state;
     public AutonomousGearLifter(boolean state) {
-    	requires(Robot.gearLifter);
+    	//requires(Robot.GearLifter);
     	this.state = state;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -20,7 +20,7 @@ public class AutonomousGearLifter extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearLifter.set(state);
+    	//Robot.gearLifter.set(state);
     }
 
     // Called repeatedly when this Command is scheduled to run

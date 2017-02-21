@@ -17,7 +17,7 @@ public class AutonomousCameraAngleCorrection extends Command {
     boolean finished;
 
     public AutonomousCameraAngleCorrection() {
-        requires(Robot.driveSystem);
+        requires(Robot.DriveSystem);
         visionService = new VisionService();
         finished = false;
     }
@@ -45,7 +45,7 @@ public class AutonomousCameraAngleCorrection extends Command {
 
     private void correct(Double angle) {
         Double speed = angle;
-        Robot.driveSystem.drive(speed, -1 * speed);
+        Robot.DriveSystem.drive(speed, -1 * speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -55,12 +55,12 @@ public class AutonomousCameraAngleCorrection extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveSystem.drive(0, 0);
+        Robot.DriveSystem.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Robot.driveSystem.drive(0, 0);
+        Robot.DriveSystem.drive(0, 0);
     }
 }

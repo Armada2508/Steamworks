@@ -16,13 +16,13 @@ public class AutonomousGearOC extends Command {
 	boolean state;
     public AutonomousGearOC(boolean state) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.gearGripper);
+    	//requires(Robot.GearGripper);
     	this.state = state;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearGripper.set(state);
+    	//Robot.gearGripper.set(state);
     }
 
     // Called repeatedly when this Command is scheduled to run
