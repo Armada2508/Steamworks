@@ -4,7 +4,6 @@ package org.usfirst.frc.team2508.robot;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -14,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2508.robot.commands.DriveRobot;
 import org.usfirst.frc.team2508.robot.commands.GearLG;
 import org.usfirst.frc.team2508.robot.commands.Winch;
+import org.usfirst.frc.team2508.robot.commands.autonomousCommand;
 import org.usfirst.frc.team2508.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team2508.robot.subsystems.GearSystem;
 import org.usfirst.frc.team2508.robot.subsystems.AutoOutputs;
@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final Compressor mainCompressor = new Compressor(0);
 
-	Command autonomousCommand;
+	Command autonomousCommand = new autonomousCommand();
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -93,31 +93,6 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 		
-		
-		//Robot.AutoOutputs.aOutputs(gearLift, gearPick, wPowerL, wPowerR);
-		Robot.AutoOutputs.aOutputs(false, true, 0, 0);
-		System.out.println("1 okay");
-		Timer.delay(.8);
-		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
-		System.out.println("1 okay");
-		Timer.delay(.8);
-		Robot.AutoOutputs.aOutputs(true, true, .5, .5);
-		System.out.println("2 okay");
-		Timer.delay(4000);
-		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
-		System.out.println("3 okay");
-		Timer.delay(2);
-		Robot.AutoOutputs.aOutputs(true, true, .2, .2);
-		Timer.delay(3);
-		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
-		Timer.delay(1.5);
-		Robot.AutoOutputs.aOutputs(true, false, 0, 0);
-		Timer.delay(1);
-		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
-		Timer.delay(.5);
-		Robot.AutoOutputs.aOutputs(false, false, -.5, -.5);
-		Timer.delay(1);
-		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 	}
 
 	/**
