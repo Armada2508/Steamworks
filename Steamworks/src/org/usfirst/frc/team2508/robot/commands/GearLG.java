@@ -32,6 +32,10 @@ public class GearLG extends Command {
     	if (Robot.oi.a.get()) {
     		Robot.GearSystem.GearLift(false);
     	}
+    	if (Robot.oi.start.get()) {
+    		Robot.GearSystem.GearLift(false);
+    		Robot.GearSystem.GearPick(false);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
