@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class GearSystem extends Subsystem {
-	Solenoid GearLiftSolenoid = new Solenoid(0);
+	DoubleSolenoid GearLiftSolenoid = new DoubleSolenoid(3, 0);
 	DoubleSolenoid GearPickSolenoid = new DoubleSolenoid(1, 2);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -19,9 +19,9 @@ public class GearSystem extends Subsystem {
     }
     public void GearLift (boolean GearLiftStatus) {
     	if (GearLiftStatus) {
-    		GearLiftSolenoid.set(true);
+    		GearLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     	} else {
-    		GearLiftSolenoid.set(false);
+    		GearLiftSolenoid.set(DoubleSolenoid.Value.kForward);
     	}
     }
     public void GearPick(boolean GearPickStatus) {

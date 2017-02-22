@@ -122,14 +122,24 @@ public class Robot extends IterativeRobot {
 		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
 		System.out.println("1 okay");
 		Timer.delay(.8);
-		Robot.AutoOutputs.aOutputs(true, true, .3, .3);
-		System.out.println("2 okay");
-		Timer.delay(1.9);
-//		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
-//		System.out.println("3 okay");
-//		Timer.delay(2);
-//		Robot.AutoOutputs.aOutputs(true, true, .2, .2);
-//		Timer.delay(3);
+		if(false){ //doMiddleGear
+			Robot.AutoOutputs.aOutputs(true, true, .3, .3);
+			System.out.println("2 okay");
+			Timer.delay(1.9);
+	//		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
+	//		System.out.println("3 okay");
+	//		Timer.delay(2);
+	//		Robot.AutoOutputs.aOutputs(true, true, .2, .2);
+	//		Timer.delay(3);
+		}else{
+			Robot.AutoOutputs.aOutputs(true, true, .3, .3);
+			System.out.println("2 okay");
+			Timer.delay(2);
+			Robot.AutoOutputs.aOutputs(true, true, -.3, .3);
+			Timer.delay(0.45);
+			Robot.AutoOutputs.aOutputs(true, true, .3, .3);
+			Timer.delay(1.00);
+		}
 		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
 		Timer.delay(1.5);
 		Robot.AutoOutputs.aOutputs(true, false, 0, 0);
@@ -140,7 +150,6 @@ public class Robot extends IterativeRobot {
 		Timer.delay(0.2);
 		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 	}
-
 	/**
 	 * This function is called periodically during autonomous
 	 */
