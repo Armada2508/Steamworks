@@ -18,14 +18,19 @@ public class autonomousCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		//Robot.AutoOutputs.aOutputs(gearLift, gearPick, wPowerL, wPowerR);
+    	//sets all to zero
     	Robot.AutoOutputs.aOutputs(false, false, 0, 0);
+    	//holds gear
 		Robot.AutoOutputs.aOutputs(false, true, 0, 0);
 		Timer.delay(.8);
+		//holds and picks up gear
 		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
 		Timer.delay(.8);
+		//holds pick up gear and drives at 50% straight  
 		Robot.AutoOutputs.aOutputs(true, true, .5, .5);
 		System.out.println("2 okay");
 		Timer.delay(4000);
+		
 		Robot.AutoOutputs.aOutputs(true, true, 0, .3);
 		System.out.println("3 okay");
 		Timer.delay(2);
