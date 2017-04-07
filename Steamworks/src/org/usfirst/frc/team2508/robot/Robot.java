@@ -134,11 +134,11 @@ public class Robot extends IterativeRobot {
 		}else{
 			Robot.AutoOutputs.aOutputs(true, true, .3, .3);
 			System.out.println("2 okay");
-			Timer.delay(2);
+			Timer.delay(2.2);
 			Robot.AutoOutputs.aOutputs(true, true, -.3, .3);
 			Timer.delay(0.45);
 			Robot.AutoOutputs.aOutputs(true, true, .3, .3);
-			Timer.delay(1.00);
+			Timer.delay(1.50);
 		}
 		Robot.AutoOutputs.aOutputs(true, true, 0, 0);
 		Timer.delay(1.5);
