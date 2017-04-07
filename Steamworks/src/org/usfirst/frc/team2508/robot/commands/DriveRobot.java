@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2508.robot.commands;
 
+import org.usfirst.frc.team2508.robot.Pair;
 import org.usfirst.frc.team2508.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,8 +23,26 @@ public class DriveRobot extends Command {
     }
 
 
+    Pair rampPairThing = new Pair(0,0);
+    final double slewRate = 0.1;
+
     // Called repeatedly when this Command is scheduled to run
 	
+    private Pair doTimeRamp(long millisPerTick, Pair pair)
+    {
+        double posSlewLimit = slewRate*1000/millisPerTick;
+        double negSlewLimit = -posSlewLimit;
+		double leftDiff = pair.left - rampPairThing.left;
+        double rightDiff = pair.right - rampPairThing.right;
+       
+        leftDiff = Math.max(negSlewLimit, Math.min(posSlewLimit, leftDiff));
+        rightDiff = Math.max(negSlewLimit, Math.min(posSlewLimit, rightDiff));
+        
+        rampPairThing = new Pair(rampPairThing.left + leftDiff, rampPairThing.right + rightDiff);
+        
+        return rampPairThing;
+    }
+    
     protected void execute() {
     	
 		double RCalc1, LCalc1;
@@ -31,7 +50,10 @@ public class DriveRobot extends Command {
 		LCalc1 = Robot.oi.stick.getRawAxis(1);
 		RCalc1 -= Robot.oi.stick.getRawAxis(4);
 		LCalc1 += Robot.oi.stick.getRawAxis(4);
-		Robot.DriveSystem.drive(LCalc1,RCalc1);    	
+
+		Pair pair = doTimeRamp(20, new Pair(LCalc1,RCalc1));
+		
+		Robot.DriveSystem.drive(pair.left,pair.right);    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
