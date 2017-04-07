@@ -146,9 +146,9 @@ public class Robot extends IterativeRobot {
 		Timer.delay(1);
 		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 		Timer.delay(.5);
-		Robot.AutoOutputs.aOutputs(false, false, -.5, -.5);
-		Timer.delay(0.2);
-		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
+//		Robot.AutoOutputs.aOutputs(false, false, -.5, -.5);
+//		Timer.delay(0.2);
+//		Robot.AutoOutputs.aOutputs(false, false, 0, 0);
 	}
 	/**
 	 * This function is called periodically during autonomous
